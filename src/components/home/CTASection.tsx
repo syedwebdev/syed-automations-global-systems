@@ -36,7 +36,7 @@ const CTASection = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/audit" className="btn-primary flex items-center gap-2 w-full sm:w-auto justify-center">
+              <Link to="/start-your-automation" className="btn-primary flex items-center gap-2 w-full sm:w-auto justify-center">
                 Get Started Today
                 <ArrowRight className="w-5 h-5" />
               </Link>
