@@ -9,6 +9,7 @@ import Solutions from "./pages/Solutions";
 import Industries from "./pages/Industries";
 import Pricing from "./pages/Pricing";
 import Audit from "./pages/Audit";
+import StartAutomation from "./pages/StartAutomation";
 import Resources from "./pages/Resources";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/industries" element={<Industries />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/audit" element={<Audit />} />
+          <Route path="/start-your-automation" element={<StartAutomation />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
