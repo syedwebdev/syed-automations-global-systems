@@ -89,9 +89,12 @@ const Navbar = () => {
           </div>
 
           {/* CTA Button */}
-          <div className="hidden lg:flex items-center gap-4">
-            <Link to="/audit" className="btn-primary text-sm">
-              Book Free Audit
+          <div className="hidden lg:flex items-center gap-3">
+            <Link to="/auth" className="text-sm font-medium text-muted-foreground hover:text-foreground px-3 py-2">
+              Sign In
+            </Link>
+            <Link to="/start-your-automation" className="btn-primary text-sm">
+              Start Automating
             </Link>
           </div>
 
@@ -127,13 +130,20 @@ const Navbar = () => {
                   </Link>
                 </div>
               ))}
-              <div className="pt-4">
+              <div className="pt-4 space-y-2">
                 <Link
-                  to="/audit"
+                  to="/auth"
+                  onClick={() => setIsOpen(false)}
+                  className="btn-secondary block text-center"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to="/start-your-automation"
                   onClick={() => setIsOpen(false)}
                   className="btn-primary block text-center"
                 >
-                  Book Free Audit
+                  Start Automating
                 </Link>
               </div>
             </div>
