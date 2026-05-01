@@ -12,6 +12,9 @@ import Audit from "./pages/Audit";
 import StartAutomation from "./pages/StartAutomation";
 import Resources from "./pages/Resources";
 import Contact from "./pages/Contact";
+import Checkout from "./pages/Checkout";
+import Auth from "./pages/Auth";
+import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +35,9 @@ const App = () => (
           <Route path="/start-your-automation" element={<StartAutomation />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/checkout/:plan" element={<Checkout />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -2,71 +2,122 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import GlassCard from "@/components/ui/GlassCard";
-import { Check, ArrowRight, Sparkles } from "lucide-react";
+import { Check, Sparkles, X } from "lucide-react";
 import { motion } from "framer-motion";
 
-const pricingTiers = [
+type Plan = {
+  id: string;
+  name: string;
+  price: string;
+  priceSuffix?: string;
+  tagline: string;
+  features: string[];
+  cta: string;
+  ctaTo: string;
+  highlighted?: boolean;
+};
+
+const plans: Plan[] = [
   {
-    name: "Starter Automation",
-    ideal: "Small businesses & startups",
-    description: "Perfect for businesses beginning their automation journey.",
-    engagement: "Project-based",
+    id: "starter",
+    name: "Starter",
+    price: "₹1,499",
+    priceSuffix: "/month",
+    tagline: "Begin your automation journey",
     features: [
-      "1-3 automated workflows",
-      "Basic integrations",
-      "Email & chat support",
-      "30-day optimization period",
-      "Documentation & training",
+      "Basic workflows",
+      "Limited automations",
+      "Standard integrations",
+      "Email support",
     ],
-    highlighted: false,
+    cta: "Activate Plan",
+    ctaTo: "/checkout/starter",
   },
   {
-    name: "Business Automation",
-    ideal: "Growing businesses",
-    description: "Comprehensive automation for scaling operations.",
-    engagement: "Retainer / Project",
+    id: "growth",
+    name: "Growth",
+    price: "₹5,999",
+    priceSuffix: "/month",
+    tagline: "Scale operations across teams",
     features: [
-      "5-10 automated workflows",
-      "Advanced integrations",
-      "Priority support",
-      "Custom dashboard",
-      "Monthly optimization reviews",
-      "Dedicated success manager",
+      "Everything in Starter",
+      "Multi-step workflows",
+      "Priority execution",
+      "API integrations",
+      "Basic RPA bots",
     ],
+    cta: "Activate Plan",
+    ctaTo: "/checkout/growth",
     highlighted: true,
   },
   {
-    name: "Enterprise Automation",
-    ideal: "Large organizations",
-    description: "Full-scale digital transformation with ongoing support.",
-    engagement: "Annual contract",
+    id: "professional",
+    name: "Professional",
+    price: "₹9,999",
+    priceSuffix: "/month",
+    tagline: "Advanced automation logic",
     features: [
-      "Unlimited workflows",
-      "Enterprise integrations",
-      "24/7 dedicated support",
-      "Custom command center",
-      "Continuous optimization",
-      "Strategic automation roadmap",
-      "On-site workshops available",
+      "Everything in Growth",
+      "Advanced automation logic",
+      "Conditional workflows",
+      "Webhooks & triggers",
+      "Analytics dashboard",
     ],
-    highlighted: false,
+    cta: "Activate Plan",
+    ctaTo: "/checkout/professional",
   },
   {
-    name: "Custom Solutions",
-    ideal: "Unique requirements",
-    description: "Tailored automation for complex or specialized needs.",
-    engagement: "Custom scope",
+    id: "business",
+    name: "Business",
+    price: "₹19,999",
+    priceSuffix: "/month",
+    tagline: "High-volume, team-grade",
     features: [
-      "Fully customized scope",
-      "Specialized integrations",
-      "White-label options",
-      "Custom AI models",
-      "Dedicated team",
-      "Flexible engagement terms",
+      "Everything in Professional",
+      "Dedicated automation pipelines",
+      "High-volume execution",
+      "Team collaboration",
+      "Performance monitoring",
     ],
-    highlighted: false,
+    cta: "Activate Plan",
+    ctaTo: "/checkout/business",
+  },
+  {
+    id: "enterprise",
+    name: "Enterprise",
+    price: "Custom",
+    tagline: "Tailored to your operations",
+    features: [
+      "Custom RPA bots",
+      "Dedicated infrastructure",
+      "SLA-based uptime",
+      "Account manager",
+      "Custom integrations",
+    ],
+    cta: "Talk to Sales",
+    ctaTo: "/contact",
   },
 ];
+
+const comparisonRows: Array<{
+  feature: string;
+  values: (string | boolean)[];
+}> = [
+  { feature: "Number of workflows", values: ["3", "15", "50", "Unlimited", "Unlimited"] },
+  { feature: "Automation complexity", values: ["Basic", "Multi-step", "Advanced + Conditional", "Pipelines", "Custom"] },
+  { feature: "API & Webhooks", values: [false, true, true, true, true] },
+  { feature: "RPA capabilities", values: [false, "Basic", "Advanced", "High-volume", "Custom RPA bots"] },
+  { feature: "Execution speed", values: ["Standard", "Priority", "Priority", "Dedicated", "Dedicated infra"] },
+  { feature: "Support level", values: ["Email", "Email + Chat", "Priority", "Priority + Phone", "24/7 + SLA"] },
+  { feature: "Custom integrations", values: [false, false, true, true, true] },
+  { feature: "Dedicated manager", values: [false, false, false, true, true] },
+];
+
+const renderCell = (val: string | boolean) => {
+  if (val === true) return <Check className="w-5 h-5 text-primary mx-auto" />;
+  if (val === false) return <X className="w-5 h-5 text-muted-foreground/40 mx-auto" />;
+  return <span className="text-sm text-foreground">{val}</span>;
+};
 
 const Pricing = () => {
   return (
@@ -75,99 +126,155 @@ const Pricing = () => {
       <section className="section-padding relative overflow-hidden">
         <div className="absolute inset-0 grid-pattern opacity-30" />
         <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-primary/20 rounded-full blur-[120px]" />
-        
+
         <div className="section-container relative z-10">
           <AnimatedSection className="max-w-4xl mx-auto text-center">
             <span className="text-primary font-medium text-sm uppercase tracking-wider mb-4 block">
               Pricing
             </span>
             <h1 className="font-display text-4xl lg:text-6xl font-bold mb-6">
-              Engagement Models{" "}
-              <span className="gradient-text">Built for Growth</span>
+              Simple, scalable plans for{" "}
+              <span className="gradient-text">automation infrastructure</span>
             </h1>
             <p className="text-muted-foreground text-xl">
-              Flexible automation solutions designed to match your business 
-              scale and objectives.
+              Choose a plan, deploy workflows, and scale anytime. No hidden fees.
             </p>
           </AnimatedSection>
         </div>
       </section>
 
       {/* Pricing Cards */}
-      <section className="pb-24">
+      <section className="pb-16">
         <div className="section-container">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {pricingTiers.map((tier, index) => (
-              <AnimatedSection key={tier.name} delay={index * 0.1}>
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+            {plans.map((plan, index) => (
+              <AnimatedSection key={plan.id} delay={index * 0.08}>
                 <motion.div
                   whileHover={{ y: -8 }}
-                  className={`h-full ${tier.highlighted ? 'relative' : ''}`}
+                  className={`h-full relative ${plan.highlighted ? "lg:scale-105" : ""}`}
                 >
-                  {tier.highlighted && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-primary to-secondary rounded-full">
-                      <span className="text-xs font-semibold text-primary-foreground flex items-center gap-1">
+                  {plan.highlighted && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-primary to-secondary rounded-full z-10">
+                      <span className="text-xs font-semibold text-primary-foreground flex items-center gap-1 whitespace-nowrap">
                         <Sparkles className="w-3 h-3" />
                         Most Popular
                       </span>
                     </div>
                   )}
-                  <GlassCard 
+                  <GlassCard
                     hover={false}
-                    className={`h-full flex flex-col ${tier.highlighted ? 'border-primary/50 shadow-[0_0_40px_-10px_hsl(var(--glow-primary)/0.3)]' : ''}`}
+                    className={`h-full flex flex-col ${
+                      plan.highlighted
+                        ? "border-primary/50 shadow-[0_0_40px_-10px_hsl(var(--glow-primary)/0.4)]"
+                        : ""
+                    }`}
                   >
                     <div className="mb-6">
-                      <h3 className="font-display text-xl font-bold mb-2">{tier.name}</h3>
-                      <p className="text-primary text-sm mb-2">{tier.ideal}</p>
-                      <p className="text-muted-foreground text-sm">{tier.description}</p>
-                    </div>
-
-                    <div className="mb-6 pb-6 border-b border-border">
-                      <span className="text-muted-foreground text-sm">Engagement:</span>
-                      <p className="font-semibold text-foreground">{tier.engagement}</p>
+                      <h3 className="font-display text-xl font-bold mb-1">{plan.name}</h3>
+                      <p className="text-muted-foreground text-sm mb-4">{plan.tagline}</p>
+                      <div className="flex items-baseline gap-1">
+                        <span className="font-display text-3xl font-bold gradient-text">
+                          {plan.price}
+                        </span>
+                        {plan.priceSuffix && (
+                          <span className="text-muted-foreground text-sm">{plan.priceSuffix}</span>
+                        )}
+                      </div>
                     </div>
 
                     <ul className="space-y-3 flex-1 mb-8">
-                      {tier.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-2">
+                      {plan.features.map((f) => (
+                        <li key={f} className="flex items-start gap-2">
                           <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                          <span className="text-muted-foreground text-sm">{feature}</span>
+                          <span className="text-muted-foreground text-sm">{f}</span>
                         </li>
                       ))}
                     </ul>
 
-                    <Link 
-                      to="/contact" 
-                      className={tier.highlighted ? "btn-primary text-center" : "btn-secondary text-center"}
+                    <Link
+                      to={plan.ctaTo}
+                      className={
+                        plan.highlighted
+                          ? "btn-primary text-center"
+                          : "btn-secondary text-center"
+                      }
                     >
-                      Request Proposal
+                      {plan.cta}
                     </Link>
                   </GlassCard>
                 </motion.div>
               </AnimatedSection>
             ))}
           </div>
+
+          <p className="text-center text-muted-foreground mt-10">
+            All plans are billed monthly. Scale anytime.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
+            <Link to="/start-your-automation" className="btn-primary">
+              Start Automating
+            </Link>
+            <Link to="/checkout/growth" className="btn-secondary">
+              Activate Plan
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* FAQ-style Note */}
+      {/* Comparison Table */}
       <section className="pb-24">
         <div className="section-container">
+          <AnimatedSection className="text-center mb-12">
+            <span className="text-primary font-medium text-sm uppercase tracking-wider mb-4 block">
+              Compare Plans
+            </span>
+            <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
+              Find the right fit for your operations
+            </h2>
+          </AnimatedSection>
+
           <AnimatedSection>
-            <GlassCard className="p-8 lg:p-12 text-center max-w-3xl mx-auto">
-              <h2 className="font-display text-2xl font-bold mb-4">
-                Why No Fixed Prices?
-              </h2>
-              <p className="text-muted-foreground mb-6">
-                Every business is unique. Automation complexity, integration 
-                requirements, and desired outcomes vary significantly. We provide 
-                custom proposals that reflect your actual needs—not a one-size-fits-all 
-                price that might under or over-scope your project.
-              </p>
-              <Link to="/audit" className="btn-primary inline-flex items-center gap-2">
-                Get Custom Quote
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            </GlassCard>
+            <div className="glass-card overflow-x-auto">
+              <table className="w-full min-w-[760px]">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="text-left p-4 font-semibold text-sm text-muted-foreground">
+                      Feature
+                    </th>
+                    {plans.map((p) => (
+                      <th
+                        key={p.id}
+                        className={`p-4 text-sm font-semibold ${
+                          p.highlighted ? "text-primary" : "text-foreground"
+                        }`}
+                      >
+                        {p.name}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparisonRows.map((row, i) => (
+                    <tr
+                      key={row.feature}
+                      className={`border-b border-border/50 ${
+                        i % 2 === 0 ? "bg-card/20" : ""
+                      }`}
+                    >
+                      <td className="p-4 text-sm font-medium text-foreground">
+                        {row.feature}
+                      </td>
+                      {row.values.map((v, j) => (
+                        <td key={j} className="p-4 text-center">
+                          {renderCell(v)}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </AnimatedSection>
         </div>
       </section>
