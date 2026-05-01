@@ -206,7 +206,7 @@ const Solutions = () => {
                 opportunities for your business.
               </p>
               <Link to="/audit" className="btn-primary inline-flex items-center gap-2">
-                Book Free Audit
+                Start Automating
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </GlassCard>
