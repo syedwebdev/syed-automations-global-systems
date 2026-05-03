@@ -114,7 +114,18 @@ const comparisonRows: Array<{
 ];
 
 const renderCell = (val: string | boolean) => {
-  if (val === true) return <Check className="w-5 h-5 text-primary mx-auto" />;
+  if (val === true)
+    return (
+      <motion.span
+        initial={{ scale: 0, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ type: "spring", stiffness: 300, damping: 18 }}
+        className="inline-flex"
+      >
+        <Check className="w-5 h-5 text-primary mx-auto" />
+      </motion.span>
+    );
   if (val === false) return <X className="w-5 h-5 text-muted-foreground/40 mx-auto" />;
   return <span className="text-sm text-foreground">{val}</span>;
 };
