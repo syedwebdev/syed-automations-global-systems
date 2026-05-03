@@ -95,8 +95,9 @@ const DashboardPreviewSection = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.08 }}
                       viewport={{ once: true }}
-                      className="flex items-center justify-between p-3 rounded-lg bg-background/40 border border-border/50"
+                      className="relative overflow-hidden flex items-center justify-between p-3 rounded-lg bg-background/40 border border-border/50 transition-all duration-300 hover:border-primary/40 hover:bg-background/60"
                     >
+                      {w.status === "running" && <div className="absolute inset-0 shimmer pointer-events-none" />}
                       <div className="flex items-center gap-3">
                         {w.status === "running" ? (
                           <Loader2 className="w-4 h-4 text-primary animate-spin" />
