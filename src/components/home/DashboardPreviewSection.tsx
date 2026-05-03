@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import AnimatedSection from "../ui/AnimatedSection";
+import CountUp from "../ui/CountUp";
 import { motion } from "framer-motion";
 import { Play, CheckCircle2, Loader2, ArrowRight, Activity, CreditCard } from "lucide-react";
 
