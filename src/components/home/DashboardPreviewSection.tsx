@@ -52,17 +52,26 @@ const DashboardPreviewSection = () => {
               {/* Stats */}
               <div className="lg:col-span-3 grid grid-cols-2 lg:grid-cols-4 gap-3">
                 {[
-                  { label: "Active Workflows", value: "12", icon: Activity },
-                  { label: "Runs This Month", value: "8,427", icon: Play },
-                  { label: "Success Rate", value: "99.6%", icon: CheckCircle2 },
-                  { label: "Plan", value: "Growth", icon: CreditCard },
-                ].map((s) => (
-                  <div key={s.label} className="rounded-xl border border-border bg-card/40 p-4">
+                  { label: "Active Workflows", value: 12, icon: Activity },
+                  { label: "Runs This Month", value: 8427, icon: Play },
+                  { label: "Success Rate", value: 99.6, suffix: "%", decimals: 1, icon: CheckCircle2 },
+                  { label: "Plan", text: "Growth", icon: CreditCard },
+                ].map((s, i) => (
+                  <motion.div
+                    key={s.label}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 }}
+                    className="rounded-xl border border-border bg-card/40 p-4 card-hover"
+                  >
                     <div className="flex items-center gap-2 text-muted-foreground text-xs mb-2">
                       <s.icon className="w-4 h-4" /> {s.label}
                     </div>
-                    <div className="font-display text-2xl font-bold">{s.value}</div>
-                  </div>
+                    <div className="font-display text-2xl font-bold">
+                      {s.text ? s.text : <CountUp end={s.value as number} suffix={s.suffix ?? ""} decimals={s.decimals ?? 0} />}
+                    </div>
+                  </motion.div>
                 ))}
               </div>
 
