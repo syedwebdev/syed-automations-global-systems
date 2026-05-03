@@ -79,9 +79,13 @@ const DashboardPreviewSection = () => {
               <div className="lg:col-span-2 rounded-xl border border-border bg-card/40 p-4">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-semibold">Active Workflows</h3>
-                  <button className="text-xs px-3 py-1.5 rounded-lg bg-primary text-primary-foreground font-medium flex items-center gap-1">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="text-xs px-3 py-1.5 rounded-lg bg-gradient-to-r from-primary to-secondary text-primary-foreground font-medium flex items-center gap-1 shadow-[0_0_20px_-5px_hsl(var(--glow-primary)/0.6)]"
+                  >
                     <Play className="w-3 h-3" /> Run Automation
-                  </button>
+                  </motion.button>
                 </div>
                 <div className="space-y-2">
                   {workflows.map((w, i) => (
