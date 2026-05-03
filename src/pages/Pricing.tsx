@@ -260,9 +260,9 @@ const Pricing = () => {
           </AnimatedSection>
 
           <AnimatedSection>
-            <div className="glass-card overflow-x-auto">
+            <div className="glass-card overflow-x-auto max-h-[640px] overflow-y-auto">
               <table className="w-full min-w-[760px]">
-                <thead>
+                <thead className="sticky top-0 z-10 bg-card/95 backdrop-blur-md">
                   <tr className="border-b border-border">
                     <th className="text-left p-4 font-semibold text-sm text-muted-foreground">
                       Feature
@@ -283,7 +283,7 @@ const Pricing = () => {
                   {comparisonRows.map((row, i) => (
                     <tr
                       key={row.feature}
-                      className={`border-b border-border/50 ${
+                      className={`border-b border-border/50 transition-colors duration-200 hover:bg-primary/5 ${
                         i % 2 === 0 ? "bg-card/20" : ""
                       }`}
                     >
