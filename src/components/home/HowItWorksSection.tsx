@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import AnimatedSection from "../ui/AnimatedSection";
-import { Search, Palette, Rocket, BarChart3 } from "lucide-react";
+import { Search, Palette, Rocket, BarChart3, ArrowRight } from "lucide-react";
 
 const steps = [
   {
