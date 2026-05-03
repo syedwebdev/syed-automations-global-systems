@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Globe, Shield, Zap } from "lucide-react";
+import CountUp from "@/components/ui/CountUp";
+
+const stats = [
+  { end: 1000, suffix: "+", label: "Automations Executed" },
+  { end: 150, suffix: "+", label: "Global Clients" },
+  { end: 99.9, suffix: "%", decimals: 1, label: "Platform Uptime" },
+  { end: 70, suffix: "%", label: "Avg. Cost Reduction" },
+];
 
 const HeroSection = () => {
   return (
