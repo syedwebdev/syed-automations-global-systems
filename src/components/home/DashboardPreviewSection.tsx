@@ -133,7 +133,7 @@ const DashboardPreviewSection = () => {
                   <div className="w-full h-2 rounded-full bg-muted overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-primary to-secondary" style={{ width: "34%" }} />
                   </div>
-                  <div className="flex justify-between"><span className="text-muted-foreground">Status</span><span className="text-primary font-medium">Active</span></div>
+                  <div className="flex justify-between items-center"><span className="text-muted-foreground">Status</span><span className="text-primary font-medium flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-primary blink-dot" />Active</span></div>
                 </div>
                 <Link to="/dashboard" className="btn-primary text-sm text-center mt-4">
                   Open Dashboard
