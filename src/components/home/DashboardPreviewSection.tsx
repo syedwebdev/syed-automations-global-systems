@@ -131,7 +131,13 @@ const DashboardPreviewSection = () => {
                   <div className="flex justify-between"><span className="text-muted-foreground">Price</span><span className="font-medium">₹5,999/mo</span></div>
                   <div className="flex justify-between"><span className="text-muted-foreground">Usage</span><span className="font-medium">8,427 / 25,000</span></div>
                   <div className="w-full h-2 rounded-full bg-muted overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-primary to-secondary" style={{ width: "34%" }} />
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: "34%" }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.4, ease: "easeOut" }}
+                      className="h-full bg-gradient-to-r from-primary to-secondary"
+                    />
                   </div>
                   <div className="flex justify-between items-center"><span className="text-muted-foreground">Status</span><span className="text-primary font-medium flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-primary blink-dot" />Active</span></div>
                 </div>
