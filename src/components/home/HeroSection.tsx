@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Globe, Shield, Zap } from "lucide-react";
+import CountUp from "@/components/ui/CountUp";
+
+const stats = [
+  { end: 1000, suffix: "+", label: "Automations Executed" },
+  { end: 150, suffix: "+", label: "Global Clients" },
+  { end: 99.9, suffix: "%", decimals: 1, label: "Platform Uptime" },
+  { end: 70, suffix: "%", label: "Avg. Cost Reduction" },
+];
 
 const HeroSection = () => {
   return (
@@ -101,18 +109,19 @@ const HeroSection = () => {
             transition={{ duration: 0.7, delay: 0.5 }}
             className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8"
           >
-            {[
-              { value: "1,000+", label: "Automations Executed" },
-              { value: "150+", label: "Global Clients" },
-              { value: "99.9%", label: "Platform Uptime" },
-              { value: "70%", label: "Avg. Cost Reduction" },
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+                className="text-center"
+              >
                 <div className="font-display text-3xl lg:text-4xl font-bold text-foreground mb-1">
-                  {stat.value}
+                  <CountUp end={stat.end} suffix={stat.suffix} decimals={stat.decimals ?? 0} />
                 </div>
                 <div className="text-sm text-muted-foreground">{stat.label}</div>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>

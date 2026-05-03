@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import AnimatedSection from "../ui/AnimatedSection";
+import CountUp from "../ui/CountUp";
 import { motion } from "framer-motion";
 import { Play, CheckCircle2, Loader2, ArrowRight, Activity, CreditCard } from "lucide-react";
 
@@ -51,17 +52,26 @@ const DashboardPreviewSection = () => {
               {/* Stats */}
               <div className="lg:col-span-3 grid grid-cols-2 lg:grid-cols-4 gap-3">
                 {[
-                  { label: "Active Workflows", value: "12", icon: Activity },
-                  { label: "Runs This Month", value: "8,427", icon: Play },
-                  { label: "Success Rate", value: "99.6%", icon: CheckCircle2 },
-                  { label: "Plan", value: "Growth", icon: CreditCard },
-                ].map((s) => (
-                  <div key={s.label} className="rounded-xl border border-border bg-card/40 p-4">
+                  { label: "Active Workflows", value: 12, icon: Activity },
+                  { label: "Runs This Month", value: 8427, icon: Play },
+                  { label: "Success Rate", value: 99.6, suffix: "%", decimals: 1, icon: CheckCircle2 },
+                  { label: "Plan", text: "Growth", icon: CreditCard },
+                ].map((s, i) => (
+                  <motion.div
+                    key={s.label}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 }}
+                    className="rounded-xl border border-border bg-card/40 p-4 card-hover"
+                  >
                     <div className="flex items-center gap-2 text-muted-foreground text-xs mb-2">
                       <s.icon className="w-4 h-4" /> {s.label}
                     </div>
-                    <div className="font-display text-2xl font-bold">{s.value}</div>
-                  </div>
+                    <div className="font-display text-2xl font-bold">
+                      {s.text ? s.text : <CountUp end={s.value as number} suffix={s.suffix ?? ""} decimals={s.decimals ?? 0} />}
+                    </div>
+                  </motion.div>
                 ))}
               </div>
 
@@ -69,9 +79,13 @@ const DashboardPreviewSection = () => {
               <div className="lg:col-span-2 rounded-xl border border-border bg-card/40 p-4">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-semibold">Active Workflows</h3>
-                  <button className="text-xs px-3 py-1.5 rounded-lg bg-primary text-primary-foreground font-medium flex items-center gap-1">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="text-xs px-3 py-1.5 rounded-lg bg-gradient-to-r from-primary to-secondary text-primary-foreground font-medium flex items-center gap-1 shadow-[0_0_20px_-5px_hsl(var(--glow-primary)/0.6)]"
+                  >
                     <Play className="w-3 h-3" /> Run Automation
-                  </button>
+                  </motion.button>
                 </div>
                 <div className="space-y-2">
                   {workflows.map((w, i) => (
@@ -81,8 +95,9 @@ const DashboardPreviewSection = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.08 }}
                       viewport={{ once: true }}
-                      className="flex items-center justify-between p-3 rounded-lg bg-background/40 border border-border/50"
+                      className="relative overflow-hidden flex items-center justify-between p-3 rounded-lg bg-background/40 border border-border/50 transition-all duration-300 hover:border-primary/40 hover:bg-background/60"
                     >
+                      {w.status === "running" && <div className="absolute inset-0 shimmer pointer-events-none" />}
                       <div className="flex items-center gap-3">
                         {w.status === "running" ? (
                           <Loader2 className="w-4 h-4 text-primary animate-spin" />
@@ -116,9 +131,15 @@ const DashboardPreviewSection = () => {
                   <div className="flex justify-between"><span className="text-muted-foreground">Price</span><span className="font-medium">₹5,999/mo</span></div>
                   <div className="flex justify-between"><span className="text-muted-foreground">Usage</span><span className="font-medium">8,427 / 25,000</span></div>
                   <div className="w-full h-2 rounded-full bg-muted overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-primary to-secondary" style={{ width: "34%" }} />
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: "34%" }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.4, ease: "easeOut" }}
+                      className="h-full bg-gradient-to-r from-primary to-secondary"
+                    />
                   </div>
-                  <div className="flex justify-between"><span className="text-muted-foreground">Status</span><span className="text-primary font-medium">Active</span></div>
+                  <div className="flex justify-between items-center"><span className="text-muted-foreground">Status</span><span className="text-primary font-medium flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-primary blink-dot" />Active</span></div>
                 </div>
                 <Link to="/dashboard" className="btn-primary text-sm text-center mt-4">
                   Open Dashboard
