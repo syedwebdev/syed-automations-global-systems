@@ -159,13 +159,20 @@ const Pricing = () => {
         <div className="section-container">
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
             {plans.map((plan, index) => (
-              <AnimatedSection key={plan.id} delay={index * 0.08}>
+              <motion.div
+                key={plan.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
+              >
                 <motion.div
-                  whileHover={{ y: -8 }}
-                  className={`h-full relative ${plan.highlighted ? "lg:scale-105" : ""}`}
+                  whileHover={{ y: -10, scale: plan.highlighted ? 1.07 : 1.03 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className={`h-full relative ${plan.highlighted ? "lg:scale-105 animate-float-soft" : ""}`}
                 >
                   {plan.highlighted && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-primary to-secondary rounded-full z-10">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-primary to-secondary rounded-full z-10 shadow-[0_0_20px_-2px_hsl(var(--glow-primary)/0.6)]">
                       <span className="text-xs font-semibold text-primary-foreground flex items-center gap-1 whitespace-nowrap">
                         <Sparkles className="w-3 h-3" />
                         Most Popular
@@ -174,10 +181,10 @@ const Pricing = () => {
                   )}
                   <GlassCard
                     hover={false}
-                    className={`h-full flex flex-col ${
+                    className={`h-full flex flex-col transition-all duration-300 ${
                       plan.highlighted
-                        ? "border-primary/50 shadow-[0_0_40px_-10px_hsl(var(--glow-primary)/0.4)]"
-                        : ""
+                        ? "border-primary/60 shadow-[0_0_50px_-10px_hsl(var(--glow-primary)/0.5)] hover:shadow-[0_0_70px_-10px_hsl(var(--glow-primary)/0.7)] hover:bg-gradient-to-br hover:from-primary/5 hover:to-secondary/5"
+                        : "hover:border-primary/40 hover:shadow-[0_20px_50px_-20px_hsl(var(--glow-primary)/0.35)]"
                     }`}
                   >
                     <div className="mb-6">
@@ -194,11 +201,18 @@ const Pricing = () => {
                     </div>
 
                     <ul className="space-y-3 flex-1 mb-8">
-                      {plan.features.map((f) => (
-                        <li key={f} className="flex items-start gap-2">
+                      {plan.features.map((f, fi) => (
+                        <motion.li
+                          key={f}
+                          initial={{ opacity: 0, x: -8 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.35, delay: 0.15 + fi * 0.06 }}
+                          className="flex items-start gap-2"
+                        >
                           <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                           <span className="text-muted-foreground text-sm">{f}</span>
-                        </li>
+                        </motion.li>
                       ))}
                     </ul>
 
@@ -214,7 +228,7 @@ const Pricing = () => {
                     </Link>
                   </GlassCard>
                 </motion.div>
-              </AnimatedSection>
+              </motion.div>
             ))}
           </div>
 
