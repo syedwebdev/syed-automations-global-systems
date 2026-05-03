@@ -100,13 +100,13 @@
 
   /* Premium button styles */
   .btn-primary {
-    @apply bg-primary text-primary-foreground font-semibold px-8 py-4 rounded-xl transition-all duration-300;
-    @apply hover:shadow-[0_0_30px_-5px_hsl(var(--glow-primary)/0.6)] hover:scale-[1.02];
+    @apply relative bg-gradient-to-r from-primary to-secondary bg-[length:200%_100%] bg-left text-primary-foreground font-semibold px-8 py-4 rounded-xl transition-all duration-300 will-change-transform;
+    @apply hover:shadow-[0_0_30px_-5px_hsl(var(--glow-primary)/0.7)] hover:-translate-y-0.5 hover:bg-right active:scale-95;
   }
 
   .btn-secondary {
-    @apply bg-transparent border-2 border-primary/50 text-foreground font-semibold px-8 py-4 rounded-xl transition-all duration-300;
-    @apply hover:border-primary hover:bg-primary/10;
+    @apply bg-transparent border-2 border-primary/50 text-foreground font-semibold px-8 py-4 rounded-xl transition-all duration-300 will-change-transform;
+    @apply hover:border-primary hover:bg-primary/10 hover:-translate-y-0.5 hover:shadow-[0_0_24px_-8px_hsl(var(--glow-primary)/0.5)] active:scale-95;
   }
 
   .btn-glass {
